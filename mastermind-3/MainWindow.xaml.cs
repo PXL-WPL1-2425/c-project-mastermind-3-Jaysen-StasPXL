@@ -60,4 +60,33 @@ namespace Mastermind
             CurrentPlayerLabel.Content = $"Huidige Speler: {_players[_currentPlayerIndex]} - Score: {_score}";
         }
 
-     
+        // -------------------------------
+        // 15. MASTERMINDSPEL: Hint kopen
+        // -------------------------------
+        private void BuyHint()
+        {
+            MessageBoxResult result = MessageBox.Show("Wil je een hint kopen? (15 strafpunten voor kleur, 25 voor kleur op juiste plaats)", "Koop Hint", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                // Vraag de speler welk type hint hij wil kopen
+                string hintChoice = Microsoft.VisualBasic.Interaction.InputBox("Welke hint wil je kopen? Kies 'kleur' of 'positie'.", "Hint Keuze");
+
+                if (hintChoice.ToLower() == "kleur" && _score >= _colorHintPenalty)
+                {
+                    _score -= _colorHintPenalty;
+                    MessageBox.Show("Je hebt 15 strafpunten betaald voor een kleur hint.");
+                }
+                else if (hintChoice.ToLower() == "positie" && _score >= _positionHintPenalty)
+                {
+                    _score -= _positionHintPenalty;
+                    MessageBox.Show("Je hebt 25 strafpunten betaald voor een positie hint.");
+                }
+                else
+                {
+                    MessageBox.Show("Je hebt niet genoeg punten voor deze hint.");
+                }
+                UpdatePlayerDisplay();  // Score updaten na hint aankoop
+            }
+        }
+
+       
