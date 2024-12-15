@@ -163,4 +163,37 @@ namespace Mastermind
             }
         }
 
-       
+        // -------------------------------
+        // Start Game en spelers toevoegen
+        // -------------------------------
+        private void StartGame(object sender, RoutedEventArgs e)
+        {
+            // Voeg nieuwe spelers toe
+            do
+            {
+                string playerName = Microsoft.VisualBasic.Interaction.InputBox("Voer de naam van de speler in:", "Speler Toevoegen", "");
+                if (!string.IsNullOrEmpty(playerName))
+                {
+                    _players.Add(playerName);
+                }
+            } while (MessageBox.Show("Wil je een andere speler toevoegen?", "Nieuwe Speler?", MessageBoxButton.YesNo) == MessageBoxResult.Yes);
+
+            // Stel de eerste speler in
+            _currentPlayerIndex = 0;
+            UpdatePlayerDisplay();
+
+            // Vraag om het aantal kleuren
+            string colorChoice = Microsoft.VisualBasic.Interaction.InputBox("Kies het aantal kleuren (4, 5, of 6):", "Aantal Kleuren");
+            int numColors;
+            if (int.TryParse(colorChoice, out numColors) && (numColors == 4 || numColors == 5 || numColors == 6))
+            {
+                SetUpGameColors(numColors);
+            }
+            else
+            {
+                MessageBox.Show("Ongeldige keuze. Het spel wordt gestart met 4 kleuren.");
+                SetUpGameColors(4); // Standaard naar 4 kleuren als de keuze niet geldig is
+            }
+        }
+    }
+}
