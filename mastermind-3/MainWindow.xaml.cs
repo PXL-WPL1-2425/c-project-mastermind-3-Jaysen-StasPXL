@@ -50,4 +50,14 @@ namespace Mastermind
             UpdatePlayerDisplay();
         }
 
-       
+        // -------------------------------
+        // 14. MASTERMINDSPEL: Huidige speler
+        // -------------------------------
+        private void UpdatePlayerDisplay()
+        {
+            // Toon de naam van de huidige speler in de titel van het venster
+            Title = $"Mastermind - Huidige Speler: {_players[_currentPlayerIndex]}";
+            CurrentPlayerLabel.Content = $"Huidige Speler: {_players[_currentPlayerIndex]} - Score: {_score}";
+        }
+
+     
