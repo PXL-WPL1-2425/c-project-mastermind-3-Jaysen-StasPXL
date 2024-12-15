@@ -130,4 +130,37 @@ namespace Mastermind
             }
         }
 
+        // -------------------------------
+        // Extra-01: Meer kleuren
+        // -------------------------------
+        private void SetUpGameColors(int numColors)
+        {
+            List<string> availableColors = new List<string> { "Red", "Blue", "Green", "Yellow", "Purple", "Orange" };
+            _generatedCode = new string[numColors];
+
+            // Vul de gegenereerde code met willekeurige kleuren
+            Random rand = new Random();
+            for (int i = 0; i < numColors; i++)
+            {
+                _generatedCode[i] = availableColors[rand.Next(availableColors.Count)];
+            }
+
+            // Pas de ComboBoxes aan op basis van het aantal kleuren
+            if (numColors == 4)
+            {
+                ComboBox5.Visibility = Visibility.Hidden;
+                ComboBox6.Visibility = Visibility.Hidden;
+            }
+            else if (numColors == 5)
+            {
+                ComboBox5.Visibility = Visibility.Visible;
+                ComboBox6.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                ComboBox5.Visibility = Visibility.Visible;
+                ComboBox6.Visibility = Visibility.Visible;
+            }
+        }
+
        
