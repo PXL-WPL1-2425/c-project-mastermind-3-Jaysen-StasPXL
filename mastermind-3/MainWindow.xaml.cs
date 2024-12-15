@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -35,3 +36,18 @@ namespace Mastermind
             ComboBox5.ItemsSource = kleuren;
             ComboBox6.ItemsSource = kleuren;
         }
+
+        // -------------------------------
+        // 13. MASTERMINDSPEL: Speleinde en volgende speler
+        // -------------------------------
+        private void EndGame()
+        {
+            string currentPlayer = _players[_currentPlayerIndex];
+            string nextPlayer = _players[(_currentPlayerIndex + 1) % _players.Count];
+
+            MessageBox.Show($"Speler {currentPlayer} heeft het spel beëindigd. Volgende speler: {nextPlayer}");
+            _currentPlayerIndex = (_currentPlayerIndex + 1) % _players.Count; // Volgende speler
+            UpdatePlayerDisplay();
+        }
+
+       
